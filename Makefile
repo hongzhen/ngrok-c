@@ -1,5 +1,5 @@
-CFLAGS=-DOPENSSL -DOPENSSLDL -rdynamic
-LD_FLAGS=-lssl -ldl
+CFLAGS=-Wall -fexceptions -DOPENSSL=0 -DISMEEDTLS=0 -O2
+LD_FLAGS=-lpolarssl -lstdc++
 CC=g++
 
 all: ngrok
@@ -10,7 +10,7 @@ all: ngrok
 %.o: %.cpp
 	$(CC) $(CFLAGS) -o $@ -c $^
 
-OBJS= main.o cJSON.o sendmsg.o nonblocking.o sslbio.o sslbio.o ngrok.o openssldl.o
+OBJS= main.o cJSON.o sendmsg.o nonblocking.o sslbio.o sslbio.o ngrok.o
 
 ngrok: $(OBJS)
 	$(CC) $(LD_FLAGS) -o $@ $^
